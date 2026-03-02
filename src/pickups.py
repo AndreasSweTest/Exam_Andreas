@@ -1,7 +1,10 @@
+import random
+
+from .grid import Grid   # om du behöver typ-hint eller isinstance
 
 class Item:
     """Representerar saker man kan plocka upp."""
-    def __init__(self, name, value=10, symbol="?"):
+    def __init__(self, name, value=20, symbol="?"):
         self.name = name
         self.value = value
         self.symbol = symbol
@@ -10,16 +13,25 @@ class Item:
         return self.symbol
 
 
-pickups = [Item("carrot"), Item("apple"), Item("strawberry"), Item("cherry"), Item("watermelon"), Item("radish"), Item("cucumber"), Item("meatball")]
+# Alla frukter värda 20 poäng nu
+pickups = [
+    Item("carrot",      20, "c"),
+    Item("apple",       20, "a"),
+    Item("strawberry",  20, "s"),
+    Item("cherry",      20, "h"),
+    Item("watermelon",  20, "w"),
+    Item("radish",      20, "r"),
+    Item("cucumber",    20, "u"),
+    Item("meatball",    20, "m"),   # fortfarande med? :)
+]
 
 
-def randomize(grid):
+def randomize(grid: Grid):
+    """Placerar ut alla items på slumpmässiga tomma positioner"""
     for item in pickups:
         while True:
-            # slumpa en position tills vi hittar en som är ledig
-            x = grid.get_random_x()
-            y = grid.get_random_y()
+            x = random.randint(1, grid.width - 2)   # undvik väggar
+            y = random.randint(1, grid.height - 2)
             if grid.is_empty(x, y):
                 grid.set(x, y, item)
-                break  # avbryt while-loopen, fortsätt med nästa varv i for-loopen
-
+                break

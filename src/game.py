@@ -1,20 +1,17 @@
 from .grid import Grid
 from .player import Player
-from . import pickups
+from .import pickups           # ← importerar hela modulen (där randomize finns)
 
-
-
-player = Player(2, 1)
+player = Player(18, 6)   # ungefär mitten (36×12 grid → 18,6)
 score = 0
 inventory = []
 
 g = Grid()
 g.set_player(player)
 g.make_walls()
-pickups.randomize(g)
+pickups.randomize(g)     # ← funkar nu när randomize ligger i pickups.py
 
 
-# TODO: flytta denna till en annan fil
 def print_status(game_grid):
     """Visa spelvärlden och antal poäng."""
     print("--------------------------------------")
@@ -22,26 +19,53 @@ def print_status(game_grid):
     print(game_grid)
 
 
-command = "a"
-# Loopa tills användaren trycker Q eller X.
-while not command.casefold() in ["q", "x"]:
+command = ""
+while command not in ["q", "x"]:
     print_status(g)
 
-    command = input("Use WASD to move, Q/X to quit. ")
-    command = command.casefold()[:1]
+    command = input("Use WASD to move, I for inventory, Q/X to quit: ").strip().lower()
 
-    if command == "d" and player.can_move(1, 0, g):  # move right
-        # TODO: skapa funktioner, så vi inte behöver upprepa så mycket kod för riktningarna "W,A,S"
-        maybe_item = g.get(player.pos_x + 1, player.pos_y)
-        player.move(1, 0)
+    if len(command) == 0:
+        continue
 
-        if isinstance(maybe_item, pickups.Item):
-            # we found something
-            score += maybe_item.value
-            print(f"You found a {maybe_item.name}, +{maybe_item.value} points.")
-            #g.set(player.pos_x, player.pos_y, g.empty)
-            g.clear(player.pos_x, player.pos_y)
+    command = command[0]   # tar bara första tecknet
 
+    moves = {
+        'w': (0, -1),
+        'a': (-1, 0),
+        's': (0, 1),
+        'd': (1, 0)
+    }
 
-# Hit kommer vi när while-loopen slutar
-print("Thank you for playing!")
+    if command in moves:
+        dx, dy = moves[command]
+
+        new_x = player.pos_x + dx
+        new_y = player.pos_y + dy
+
+        if player.can_move(dx, dy, g):
+            maybe_item = g.get(new_x, new_y)
+            player.move(dx, dy)
+            score -= 1   # the floor is lava
+
+            if isinstance(maybe_item, pickups.Item):
+                score += maybe_item.value
+                print(f"You found a {maybe_item.name}! +{maybe_item.value} points.")
+                inventory.append(maybe_item)
+                g.clear(new_x, new_y)   # ← tömmer rutan där frukten låg
+
+    elif command == 'i':
+        if not inventory:
+            print("Your inventory is empty.")
+        else:
+            print("Inventory:")
+            for item in inventory:
+                print(f"  - {item.name} ({item.value} points)")
+
+    elif command in ["q", "x"]:
+        break
+
+    else:
+        print("Unknown command. Use w/a/s/d, i, q or x.")
+
+print("\nThank you for playing!")
