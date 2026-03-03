@@ -47,6 +47,7 @@ while command not in ["q", "x"]:
         if player.can_move(dx, dy, g):
             maybe_item = g.get(new_x, new_y)
             player.move(dx, dy)
+
             score -= 1   # the floor is lava
 
             if isinstance(maybe_item, pickups.Item):
@@ -54,6 +55,9 @@ while command not in ["q", "x"]:
                 print(f"You found a {maybe_item.name}! +{maybe_item.value} points.")
                 inventory.append(maybe_item)
                 g.clear(new_x, new_y)   # tömmer rutan där frukten låg
+
+        else:
+            print("Not allowed to walk through walls!")
 
     elif command == 'i':
         if not inventory:
