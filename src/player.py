@@ -1,3 +1,6 @@
+from operator import truediv
+
+
 class Player:
     marker = "@"
 

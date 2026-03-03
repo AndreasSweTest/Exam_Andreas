@@ -1,6 +1,6 @@
 from .grid import Grid
 from .player import Player
-from .import pickups           # ← importerar hela modulen (där randomize finns)
+from .import pickups
 
 player = Player(18, 6)   # ungefär mitten (36×12 grid → 18,6)
 score = 0
@@ -9,7 +9,8 @@ inventory = []
 g = Grid()
 g.set_player(player)
 g.make_walls()
-pickups.randomize(g)     # ← funkar nu när randomize ligger i pickups.py
+g.add_random_walls()
+pickups.randomize(g)
 
 
 def print_status(game_grid):
@@ -52,7 +53,7 @@ while command not in ["q", "x"]:
                 score += maybe_item.value
                 print(f"You found a {maybe_item.name}! +{maybe_item.value} points.")
                 inventory.append(maybe_item)
-                g.clear(new_x, new_y)   # ← tömmer rutan där frukten låg
+                g.clear(new_x, new_y)   # tömmer rutan där frukten låg
 
     elif command == 'i':
         if not inventory:
