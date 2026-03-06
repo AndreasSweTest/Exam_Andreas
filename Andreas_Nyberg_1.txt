@@ -1,0 +1,29 @@
+Andreas Nyberg
+
+Examination
+Programmering med Python, TAP HT25 D
+
+GitHub repo:
+https://github.com/AndreasSweTest/Exam_Andreas
+
+
+Inlämning
+
+1: Skapa egen kopia med hjälp av Fork från GitHub exam template
+-Done
+
+2: Kontrollera att ditt repo är publikt
+-Done
+
+3: Skapa en textfil i PyCharm
+-Done
+
+4: Namnge filen ditt_namn_1.txt
+-Done
+
+5: Lägg till en länk till ditt GitHub-repo i filen
+-Done
+
+6: Filen ska berätta vilka av kraven du har arbetat med
+A, B, C, D, E, F, G, H
+-Done
