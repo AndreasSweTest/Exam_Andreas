@@ -1,6 +1,6 @@
-from .grid import Grid
-from .player import Player
-from . import pickups
+from grid import Grid
+from player import Player
+import pickups
 
 player = Player(18, 6)   # ungefär mitten
 score = 0

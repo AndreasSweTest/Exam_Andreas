@@ -1,5 +1,5 @@
 import random
-from .grid import Grid   # om du behöver typ-hint eller isinstance
+from grid import Grid   # om du behöver typ-hint eller isinstance
 
 class Item:
     """Representerar saker man kan plocka upp."""
