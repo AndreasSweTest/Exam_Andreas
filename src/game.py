@@ -19,18 +19,15 @@ def print_status(game_grid):
     print(f"You have {score} points.")
     print(game_grid)
 
-
 command = ""
 while command not in ["q", "x"]:
     print_status(g)
-
     command = input("Use WASD to move, I for inventory, Q/X to quit: ").strip().lower()
 
     if len(command) == 0:
         continue
 
     command = command[0]   # tar bara första tecknet
-
     moves = {
         'w': (0, -1),
         'a': (-1, 0),
@@ -47,7 +44,6 @@ while command not in ["q", "x"]:
         if player.can_move(dx, dy, g):
             maybe_item = g.get(new_x, new_y)
             player.move(dx, dy)
-
             score -= 1   # the floor is lava
 
             if isinstance(maybe_item, pickups.Item):
