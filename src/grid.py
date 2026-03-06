@@ -53,7 +53,7 @@ class Grid:
             self.set(j, 0, self.wall)
             self.set(j, self.height - 1, self.wall)
 
-        def get_random_x(self):
+    def get_random_x(self):
             """Slumpa en x-position på spelplanen"""
             return random.randint(0, self.width - 1)
 
@@ -66,11 +66,10 @@ class Grid:
         return self.get(x, y) == self.empty
 
 
-
     def add_random_walls(self, attempts=40, max_length=4):
         for _ in range(attempts):
-            x = random.randint(4, self.width - 6)
-            y = random.randint(4, self.height - 6)
+            x = random.randint(4, self.width - 3)
+            y = random.randint(4, self.height - 3)
 
             if not self.is_empty(x, y):
                 continue

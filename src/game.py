@@ -1,8 +1,8 @@
 from .grid import Grid
 from .player import Player
-from .import pickups
+from . import pickups
 
-player = Player(18, 6)   # ungefär mitten (36×12 grid → 18,6)
+player = Player(18, 6)   # ungefär mitten
 score = 0
 inventory = []
 

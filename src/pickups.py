@@ -1,5 +1,4 @@
 import random
-
 from .grid import Grid   # om du behöver typ-hint eller isinstance
 
 class Item:
@@ -12,7 +11,6 @@ class Item:
     def __str__(self):
         return self.symbol
 
-
 # Alla frukter värda 20 poäng
 pickups = [
     Item("Banana",      20, "B"),
@@ -21,6 +19,7 @@ pickups = [
     Item("Cherry",      20, "C"),
     Item("Watermelon",  20, "W"),
     Item("Orange",      20, "O"),
+    Item("Kiwi",        20, "K"),
 ]
 
 

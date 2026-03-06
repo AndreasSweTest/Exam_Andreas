@@ -1,6 +1,5 @@
 from operator import truediv
 
-
 class Player:
     marker = "@"
 
@@ -10,9 +9,6 @@ class Player:
 
     # Flyttar spelaren. "dx" och "dy" är skillnaden
     def move(self, dx, dy):
-        """Flyttar spelaren.\n
-        dx = horisontell förflyttning, från vänster till höger\n
-        dy = vertikal förflyttning, uppifrån och ned"""
         self.pos_x += dx
         self.pos_y += dy
 
@@ -30,5 +26,3 @@ class Player:
 
         # Annars OK (tom eller frukt tillåts)
         return True
-
-
